@@ -25,16 +25,19 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Snyk Security Scan
-      uses: snyk/actions/node@master
-      with:
-        args: test
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-    - name: TruffleHog Secret Scan
-      uses: trufflesecurity/trufflehog@main
-      with:
-        scan-directory: '.'
-        branch: ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: snyk/actions/setup@master
+      - name: Snyk Test
+        run: snyk test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          scan-directory: '.'
+          branch: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
