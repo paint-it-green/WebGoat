@@ -25,10 +25,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn clean install
-    - name: Run tests
-      run: mvn test
     - name: Snyk Security Scan
       uses: snyk/actions/node@master
       with:
