@@ -34,7 +34,7 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     - name: TruffleHog Secret Scan
-      uses: trufflesecurity/trufflehog-actions-scan@v3
+      uses: trufflesecurity/trufflehog@v3
       with:
         scan-directory: '.'
         branch: ${{ github.ref }}
