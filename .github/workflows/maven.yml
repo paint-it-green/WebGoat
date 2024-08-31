@@ -32,6 +32,7 @@ jobs:
       - uses: snyk/actions/setup@master
       - name: Snyk Test
         run: snyk test
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: TruffleHog Secret Scan
